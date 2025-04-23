@@ -5,3 +5,7 @@ psycopg2-binary
 alembic
 python-dotenv
 databases[sqlite]
+pydantic[email]
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
