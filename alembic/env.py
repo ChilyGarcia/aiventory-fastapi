@@ -10,7 +10,7 @@ sys.path.append(BASE_DIR)
 
 from src.database import metadata, DATABASE_URL
 from src.models.user_model import usuarios
-from src.models.enterprise_model import enterprise  # Asegúrate de que el nombre coincida con tu variable Table
+from src.models.enterprise_model import enterprise
 from src.models.rol_model import rol
 from src.models.permission_role_model import permission_role
 from src.models.permission_role_model import permission

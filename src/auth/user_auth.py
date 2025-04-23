@@ -14,13 +14,14 @@ async def registrar_usuario(usuario_data):
                             detail="El email ya está registrado")
 
     hashed_pw = hash_password(usuario_data.password)
-    query = usuarios.insert().values(nombre=usuario_data.nombre,
+    query = usuarios.insert().values(name=usuario_data.name,
                                      email=usuario_data.email,
-                                     hashed_password=hashed_pw)
+                                     hashed_password=hashed_pw,
+                                     role_id=2)
     user_id = await database.execute(query)
     return {
         "id": user_id,
-        "nombre": usuario_data.nombre,
+        "name": usuario_data.name,
         "email": usuario_data.email
     }
 

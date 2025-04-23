@@ -18,13 +18,13 @@ class UserSeeder(BaseSeeder):
             enterprise.c.name == "Empresa Demo 1"))
 
         users = [{
-            "nombre": "Admin User",
+            "name": "Admin User",
             "email": "admin@example.com",
             "hashed_password": hash_password("admin123"),
             "role_id": admin_role["id"],
             "enterprise_id": enterprise_1["id"]
         }, {
-            "nombre": "Normal User",
+            "name": "Normal User",
             "email": "user@example.com",
             "hashed_password": hash_password("user123"),
             "role_id": user_role["id"],

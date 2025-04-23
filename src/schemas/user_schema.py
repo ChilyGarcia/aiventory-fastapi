@@ -2,14 +2,14 @@ from pydantic import BaseModel
 
 
 class UsuarioIn(BaseModel):
-    nombre: str
+    name: str
     email: str
     password: str
 
 
 class UsuarioOut(BaseModel):
     id: int
-    nombre: str
+    name: str
     email: str
 
 

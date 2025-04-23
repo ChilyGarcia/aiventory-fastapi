@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.database import database, engine, metadata
-from src.routes import auth_routes
+from src.routes import auth_routes, product_routes
 
 app = FastAPI(title="AIVentory API")
 
@@ -22,8 +22,9 @@ app.add_middleware(
 # Crear las tablas en la base de datos
 metadata.create_all(engine)
 
-# Incluir las rutas de autenticación
+# Incluir rutas
 app.include_router(auth_routes.router)
+app.include_router(product_routes.router)
 
 @app.on_event("startup")
 async def startup():

@@ -4,9 +4,11 @@ from src.auth.user_auth import registrar_usuario, login_usuario
 
 router = APIRouter(prefix="/auth", tags=["autenticación"])
 
-@router.post("/registro", response_model=UsuarioOut)
-async def registro(usuario: UsuarioIn):
+
+@router.post("/register", response_model=UsuarioOut)
+async def register(usuario: UsuarioIn):
     return await registrar_usuario(usuario)
+
 
 @router.post("/login")
 async def login(data: UsuarioLogin):
