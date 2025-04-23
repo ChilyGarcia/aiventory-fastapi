@@ -54,6 +54,7 @@ logs/
 # Database
 *.db
 *.sqlite3
+postgres-data/
 
 # Coverage reports
 .coverage
@@ -65,3 +66,6 @@ logs/
 # Docker
 .docker/
 docker-compose.override.yml
+
+# Alembic
+alembic.ini.sample
