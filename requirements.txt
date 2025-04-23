@@ -4,3 +4,4 @@ SQLAlchemy
 psycopg2-binary
 alembic
 python-dotenv
+databases[sqlite]
