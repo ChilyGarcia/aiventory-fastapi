@@ -1,14 +1,15 @@
+import os
 from sqlalchemy import create_engine, MetaData
 from databases import Database
+from dotenv import load_dotenv
 
-# Configuración de la base de datos
-DATABASE_URL = "sqlite:///./aiventory.db"
+load_dotenv()
 
-# Crear instancia de la base de datos
+DATABASE_URL = os.getenv("DATABASE_URL",
+                         "postgresql://postgres:123@localhost:5432/aiventory")
+
 database = Database(DATABASE_URL)
 
-# Crear engine de SQLAlchemy
 engine = create_engine(DATABASE_URL)
 
-# Crear metadata
 metadata = MetaData()

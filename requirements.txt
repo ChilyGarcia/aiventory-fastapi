@@ -4,8 +4,9 @@ SQLAlchemy
 psycopg2-binary
 alembic
 python-dotenv
-databases[sqlite]
+databases[postgresql]
 pydantic[email]
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
+asyncpg
