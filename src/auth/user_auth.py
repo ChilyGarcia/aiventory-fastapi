@@ -1,9 +1,9 @@
-from fastapi import HTTPException
-from src.models.user_model import usuarios
+from fastapi import HTTPException, status
 from src.database import database
-from src.auth.hashing import hash_password, verify_password
-from src.auth.jwt_handler import crear_token
-
+from src.models.user_model import usuarios
+from .hashing import hash_password, verify_password
+from .jwt_handler import crear_token
+from datetime import datetime
 
 async def registrar_usuario(usuario_data):
 
@@ -26,10 +26,27 @@ async def registrar_usuario(usuario_data):
     }
 
 
-async def login_usuario(data_login):
-    query = usuarios.select().where(usuarios.c.email == data_login.email)
+async def login_usuario(credentials):
+    query = usuarios.select().where(usuarios.c.email == credentials.email)
     user = await database.fetch_one(query)
-    if user and verify_password(data_login.password, user["hashed_password"]):
-        token = crear_token({"sub": user["email"], "user_id": user["id"]})
-        return {"access_token": token, "token_type": "bearer"}
-    return None
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales incorrectas"
+        )
+    
+    if not verify_password(credentials.password, user["hashed_password"]):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales incorrectas"
+        )
+    
+    token, expire = crear_token({"sub": user["email"]})
+    
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "expires_at": expire.isoformat(),
+
+    }
