@@ -12,13 +12,14 @@ logger = logging.getLogger(__name__)
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
+
 async def get_usuario_actual(token: str = Depends(oauth2_scheme)):
     """
     Dependency para obtener el usuario actual basado en el token JWT.
     Verifica que el token no esté en la blacklist antes de cualquier otra validación.
     """
     logger.info("Verificando token en get_usuario_actual")
-    
+
     # Primero verificar si el token está en la blacklist
     if is_blacklisted(token):
         logger.warning("Token encontrado en blacklist")
